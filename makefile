@@ -9,7 +9,6 @@ default:
 		rm -f $(FILE).pdf
 		xelatex -no-pdf $(TEX)
 		biber $(FILE)
-		biber $(FILE)
 		xelatex -no-pdf $(TEX)
 		xelatex -no-pdf $(TEX)
 		xdvipdfmx $(XDV)
