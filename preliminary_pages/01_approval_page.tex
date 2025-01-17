@@ -43,8 +43,12 @@
 		Department of \CommitteeMemberFiveDepartment, \CommitteeMemberFiveUniversity
 		\vspace{0.5cm}
 	}{}
+	
+	\begin{textblock*}{\textwidth}(12cm,17cm)
+		\textbf{\ApprovalPageDate}
+	\end{textblock*}
 
-	\begin{textblock*}{\textwidth}(3.5cm,17cm)
+	\begin{textblock*}{\textwidth}(3.5cm,20cm)
 		\noindent\rule{5cm}{0.1mm}\\
 		\textbf{\SupervisorTitle{ }\SupervisorName{}
 		\MakeUppercase\SupervisorSurname}\\
@@ -53,7 +57,7 @@
 	\end{textblock*}
 
 	\ifthenelse{\equal{\CoSupervisor}{yes}}{
-		\begin{textblock*}{\textwidth}(12cm,17cm)
+		\begin{textblock*}{\textwidth}(12cm,20cm)
 			\noindent\rule{5cm}{0.1mm}\\
 			\textbf{\CoSupervisorTitle{ }\CoSupervisorName{}
 			\MakeUppercase\CoSupervisorSurname}\\
@@ -61,12 +65,8 @@
 			\CoSupervisorUniversity
 		\end{textblock*}
 	}{}
-	
-	\begin{textblock*}{\textwidth}(14cm,16cm)
-		\textbf{\ApprovalPageDate}
-	\end{textblock*}
 
-	\begin{textblock*}{\textwidth}(3.5cm,20cm)
+	\begin{textblock*}{\textwidth}(3.5cm,23cm)
 		\noindent\rule{5cm}{0.1mm}\\
 		\textbf{\HeadOfTheDepartmentTitle{ }\HeadOfTheDepartmentName{}
 		\MakeUppercase\HeadOfTheDepartmentSurname}\\
@@ -74,7 +74,7 @@
 		\HeadOfTheDepartmentDepartment
 	\end{textblock*}
 
-	\begin{textblock*}{\textwidth}(12cm,20cm)
+	\begin{textblock*}{\textwidth}(12cm,23cm)
 		\noindent\rule{5cm}{0.1mm}\\
 		\textbf{\HeadOfTheGraduateSchoolTitle{ }\HeadOfTheGraduateSchoolName{}
 		\MakeUppercase\HeadOfTheGraduateSchoolSurname}\\

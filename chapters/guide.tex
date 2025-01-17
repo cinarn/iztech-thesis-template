@@ -14,21 +14,24 @@ You can create itemization like that:
 You can cite like that:
 \cite{torvalds2001just,kopka2004guide,yakaryilmaz2011unbounded,bernstein2019fast}
 
-If you need to give a page number, you can cite like that:
-\autocite[11]{almheiri2021entropy}
+If you need to give reference number, you can cite like that:
+ref~\citenum{almheiri2021entropy}
 
 You can create a table like that:
-\begin{table}[ht]
-	\caption{An Example Table}
-	\begin{center}
-		\begin{tabular}{|c||c|c|}
+\begin{table}[H]
+	\centering
+	\caption{An example table made up of 3 rows and 3 columns. Resizebox is used to scale relatively wide tables.}
+    \resizebox{0.5\linewidth}{!}{
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Col 1} & \textbf{Col 2} & \textbf{Col 3} \\
 			\hline
 			Example 1.1 & Example 2.1 & Example 3.1 \\
 			\hline
 			Example 2.1 & Example 2.2 & Example 2.3 \\
 			\hline
 		\end{tabular}
-	\end{center}
+	}
 	\label{tab:example}
 \end{table}
 Also, you can refere a table like that: "Table \ref{tab:example}".
@@ -36,11 +39,10 @@ Also, you can refere a table like that: "Table \ref{tab:example}".
 \blindtext[1]
 
 You can create a figure like that:
-\begin{figure}[ht]
-	\begin{center}
-		\includegraphics[scale=0.2]{chapters/images/example-figure.png}
-	\end{center}
-	\caption{An Example Figure}
+\begin{figure}[H]
+    \centering
+	\includegraphics[width=0.5\textwidth]{chapters/images/example-figure.png}
+	\caption{The image is a black-and-white pencil sketch showing a pen appearing to be writing on a rolled-up piece of paper. The style is realistic but slightly stylized, emphasizing texture and form.}
 	\label{fig:example}
 \end{figure}
 Also, you can refere a figure like that: "Figure \ref{fig:example}".

@@ -20,16 +20,17 @@
 	\input{preliminary_pages/07_table_of_contents.tex}
 	\input{preliminary_pages/08_list_of_figures.tex}
 	\input{preliminary_pages/09_list_of_tables.tex}
-	%\input{preliminary_pages/10_list_of_symbols.tex}
-	%\input{preliminary_pages/11_english_turkish_dictionary.tex}
-	
+	\input{preliminary_pages/20_list_of_symbols.tex}
+	\input{preliminary_pages/30_list_of_abbreviations.tex}
+	%\input{preliminary_pages/99_english_turkish_dictionary.tex}
+	\let\cleardoublepage\clearpage
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%% START OF THE TEXT %%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	% Example chapters and sections
-	\chapter{Introduction}
+	\chapter{INTRODUCTION}
 
 	% Do not remove this line. This line must be placed once immediately after 
 	% the first chapter.
@@ -49,13 +50,13 @@
 	\blindtext[5]
 	\section{Example Section 4}
 	\blindtext[5]
-	\chapter{Body}
+	\chapter{BODY}
 	\blindtext[20]
-	\chapter{Conclusion}
+	\chapter{CONCLUSION}
 	\blindtext[10]
 
 	% Guide of usage of basic LaTeX commands
-	\chapter{Guide}
+	\chapter{GUIDE}
 	\input{chapters/guide.tex}
 
 	%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,7 +64,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%
 
 	% Reference Material
-	\printbibliography
+	\printbibliography[title=REFERENCES]
 
 	\ifthenelse{\equal{\NumberOfAppendices}{1}}{
 		\begin{thesisappendices}
@@ -94,4 +95,9 @@
 			\input{chapters/appendices/appendix_d.tex}
 		\end{thesisappendices}
 	}{}
+	
+	\ifthenelse{\equal{\ThesisType}{phd}}{
+		\input{chapters/vita.tex}
+	}{}
+	
 \end{document}

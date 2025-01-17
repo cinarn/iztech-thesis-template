@@ -1,5 +1,8 @@
 ~\pagebreak
-
-\listoffigures
-
+{
+	\ifthenelse{\equal{\AllowPageBreaksInListEntries}{yes}}{
+		\countdef\interlinepenalty9999
+	}{}
+    \listoffigures
+}
 ~\pagebreak

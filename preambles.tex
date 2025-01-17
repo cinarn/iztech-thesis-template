@@ -1,3 +1,16 @@
+\usepackage{etoolbox}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{paralist}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
+
+
 % This package allows the use of conditions, making the template more dynamic.
 \usepackage{ifthen}
 
@@ -47,32 +60,29 @@
 
 % To set the chapter headings
 \titleformat{\chapter}
-	[display]
-	{\vspace{-3cm}\centering\normalfont\fontsize{16}{24}\selectfont\bfseries}
-	{CHAPTER \thechapter}
-	{0.5cm}{\MakeUppercase}
-	[\vspace{-0.2cm}]
+    [display]
+    {\centering\normalfont\fontsize{16}{24}\selectfont\bfseries}
+    {CHAPTER \thechapter}
+    {0.72cm}{\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-1.2cm}{1cm}
 
 % To set the section headings
 \titleformat{\section}
-	[hang]
-	{\normalfont\fontsize{14}{14}\selectfont\bfseries}
-	{\thesection.}
-	{0.5em}{}
+    [hang]
+    {\normalfont\fontsize{14}{14}\selectfont\bfseries}
+    {\thesection.}
+    {0.25em}{}
+\titlespacing*{\section}{0pt}{1.0cm}{0.8cm}
 
 % To set the subsection headings
 \titleformat{\subsection}
-	[hang]
-	{\normalfont\fontsize{14}{14}\selectfont\bfseries}
-	{\thesubsection.}
-	{0.5em}{}
+    [hang]
+    {\normalfont\fontsize{14}{14}\selectfont\bfseries}
+    {\thesubsection.}
+    {0.25em}{}
 
 % Set the default font size as 12
 \fontsize{12}{12}
-
-% Left one space before and after the headings
-\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
-\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
 
 % It is for the spacing.
 \usepackage{setspace}
@@ -87,14 +97,24 @@
 \usepackage{indentfirst}
 
 % Set bibliography
-\ifthenelse{\equal{\BibliographyPreferences}{chicago}}{
-	\usepackage[authordate,backend=biber]{biblatex-chicago}
-}{}
-\ifthenelse{\equal{\BibliographyPreferences}{acs}}{
-	\usepackage[style=chem-acs,backend=biber]{biblatex}
-}{}
+
+\usepackage[
+    style=chem-acs,
+    articletitle=true,
+    backend=biber,
+    doi=false,
+    sorting=none,
+    maxnames=999,
+    minnames=999
+]{biblatex}
+
+\DeclareFieldFormat{labelnumberwidth}{#1.}
+\setlength{\labelnumberwidth}{1.0em}
+
 \addbibresource{references.bib}
 \declarecommand{\cite}[1]{\autocite{#1}}
+\DeclareCiteCommand{\citenum}{}{\printfield{labelnumber}}{}{}
+
 
 % Set appendices
 \RequirePackage[toc,title]{appendix}
@@ -105,11 +125,11 @@
 	\addtocontents{toc}{\protect\vskip20pt}
 	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1pt}}
 	\begin{appendices}
-	\titleformat{\chapter}[display]
-		{\vspace{-3cm}\centering\normalfont\fontsize{16}{24}\selectfont\bfseries}
-		{APPENDIX \thechapter}
-		{0.5cm}{\MakeUppercase}
-		[\vspace{-0.2cm}]
+	\titleformat{\chapter}
+	    [display]
+    {\centering\normalfont\fontsize{16}{24}\selectfont\bfseries}
+    {APPENDIX \thechapter}
+    {0.72cm}{\MakeUppercase}
 }{
 	\end{appendices}
 }
@@ -124,8 +144,8 @@
 \usepackage[nottoc]{tocbibind}
 \RequirePackage[titles]{tocloft}
 \renewcommand{\contentsname}{TABLE OF CONTENTS}
-\renewcommand{\listtablename}{LIST OF TABLES\vspace{0.5cm}}
-\renewcommand{\listfigurename}{LIST OF FIGURES\vspace{0.5cm}}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
 \renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftdotsep}{1}
@@ -143,11 +163,11 @@
 \newlength{\mytoclength}
 \settowidth{\mytoclength}{\cftchappresnum\cftchapaftersnum}
 \addtolength\cftchapnumwidth{\mytoclength}
-\setlength{\cftsecindent}{5.5em}
-\setlength{\cftsubsecindent}{6.25em}
-\setlength{\cftsubsubsecindent}{7em}
-\setlength{\cftparaindent}{7.75em}
-\setlength{\cftsubparaindent}{8.5em}
+\setlength{\cftsecindent}{4.8em}
+\setlength{\cftsubsecindent}{5.55em}
+\setlength{\cftsubsubsecindent}{6.3em}
+\setlength{\cftparaindent}{7.05em}
+\setlength{\cftsubparaindent}{7.8em}
 
 % Set lists
 \makeatletter
@@ -158,23 +178,53 @@
 \settowidth{\mylotlength}{\cfttabpresnum\cfttabaftersnum}
 \addtolength\cfttabnumwidth{\mylotlength}
 \let\origcftdot\cftdot
+\addtocontents{toc}{\protect\vspace{-0.85cm}}
+\setlength{\cfttabindent}{0cm}
 \addtocontents{lot}{\protect\cftsetpnumwidth{25pt}}
 \addtocontents{lot}{\protect\renewcommand{\protect\cftdot}{}}
-\addtocontents{lot}{\protect\contentsline{table}{\numberline{\textbf{\underline{\tablename}~}}}{\textbf{\underline{Page}}}{}{}}
+
+\phantomsection
+\addtocontents{lot}{
+  \protect\contentsline{table}{
+    \hspace{-0.1cm}\begin{minipage}[t]{\textwidth}
+      \centering
+      \textbf{\underline{\tablename \phantom{g}}}
+      \hfill
+      \textbf{\underline{Page}}
+    \end{minipage}
+}{}{}} 
+
+\phantomsection\addtocontents{lot}{\vspace{-1.1cm}}
 \addtocontents{lot}{\protect\renewcommand{\protect\cftdot}{\origcftdot}}
+
 \renewcommand{\cftfigpresnum}{\figurename~}
 \newlength{\myloflength}
 \settowidth{\myloflength}{\cftfigpresnum\cftfigaftersnum}
 \addtolength\cftfignumwidth{\myloflength}
+\setlength{\cftfigindent}{0cm}
 \let\origcftdot\cftdot
 \addtocontents{lof}{\protect\cftsetpnumwidth{25pt}}
 \addtocontents{lof}{\protect\renewcommand{\protect\cftdot}{}}
-\phantomsection\addtocontents{lof}{
-\protect\contentsline{figure}{\numberline{\textbf{\underline{\figurename}~}}}{\textbf{\underline{Page}}}{}{}}
+
+\phantomsection
+\addtocontents{lof}{
+  \protect\contentsline{figure}{
+    \hspace{-0.1cm}\begin{minipage}[t]{\textwidth}
+      \centering
+      \textbf{\underline{\figurename}}
+      \hfill
+      \textbf{\underline{Page}}
+    \end{minipage}
+}{}{}} 
+
+\phantomsection\addtocontents{lof}{\vspace{-1.1cm}}
+
 \addtocontents{lof}{\protect\renewcommand{\protect\cftdot}{\origcftdot}}
-\makeatother
-\renewcommand{\cftfigaftersnum}{.}
+
 \renewcommand{\cfttabaftersnum}{.}
+\renewcommand{\cftfigaftersnum}{.}
+
+\makeatother
 
 % Remove the colon in the captions of the figures and tables
 \usepackage{caption}
@@ -182,16 +232,22 @@
 \captionsetup[table]{labelsep=dotspace}
 \captionsetup[figure]{labelsep=dotspace}
 
-% Figure spacings
-\BeforeBeginEnvironment{figure}{\vspace{1cm}}
-\AfterEndEnvironment{figure}{\vspace{1cm}}
+% Figure caption & spacings
+\captionsetup{format=hang}
+\captionsetup{font={stretch=1.5}}
+\setlength{\floatsep}{0.5cm} % Space between floats
+\BeforeBeginEnvironment{table}{\vspace{0.5cm}} % Before table
+\AfterEndEnvironment{table}{\vspace{0.5cm}}   % After table
+\BeforeBeginEnvironment{figure}{\vspace{0.5cm}}
+
+\raggedbottom
+\allowdisplaybreaks
 
 % Set up chapter-based numbering for figures and tables
 \usepackage{chngcntr}
 \counterwithin{figure}{chapter}
 \counterwithin{table}{chapter}
 \counterwithin{equation}{chapter}
-%\counterwithin{algorithm}{chapter}
 
 % Customizing the labels in captions
 \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
@@ -201,11 +257,3 @@
 % Eliminate the footskip warning
 \setlength{\footskip}{14.49998pt}
 
-% Other useful packages
-\usepackage{url}
-\usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage{tikz}
-\usepackage{mathtools}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.7}
